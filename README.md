@@ -41,7 +41,7 @@ geth --datadir .\node01\ account new          # creating account, remember to ba
 }
 ```
 
-- **Alloc**: modify this `aloc` block corresponsing with your created accounts from Section 2
+- **Alloc**: modify this `aloc` block corresponsing with your created accounts from Section 2 (Balance unit: `wei`)
 
 ```json
   "alloc": {
