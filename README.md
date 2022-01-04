@@ -77,6 +77,7 @@ admin.addPeer("enode://7a34a32487a65f9eb2d01b172e6f6105da8413becb53296ed0d5166f3
 <details><summary>Starting miner (synchronizing - mining transaction block)</summary>
 <p>
 
+  - Run at least on a single node for making transaction to be confirmed on every nodes.
 ```cmd
 miner.setEtherbase("0x57d863106f8e21e6962a6c5c9d8937fc429a9d14")
 miner.start()
