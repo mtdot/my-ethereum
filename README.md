@@ -51,10 +51,32 @@ geth --datadir .\node01\ account new          # creating account, remember to ba
 ```
 
 # 4. Running private network
-- Startig Nodes (Remember to collect peer string for adding peer node later - Section 5)
+
+## 4.1 - Basic
+
+- Starting Nodes (Remember to collect peer string for adding peer node later - Section 5)
 ```cmd
-geth --identity "node01" --datadir node01 --port "30303" --nat "any" --ipcdisable --http --http.port 8545 --http.api "eth,net,web3,personal,miner,admin" --allow-insecure-unlock --miner.threads=1
-geth --identity "node02" --datadir node02 --port "30304" --nat "any" --ipcdisable --http --http.port 8546 --http.api "eth,net,web3,personal,miner,admin" --allow-insecure-unlock --miner.threads=1
+geth --identity "node01" --datadir node01 --port "30303" --ipcdisable --http --http.port 8545 --http.api "eth,net,web3,personal,miner,admin" --allow-insecure-unlock --miner.threads=1
+geth --identity "node02" --datadir node02 --port "30304" --ipcdisable --http --http.port 8546 --http.api "eth,net,web3,personal,miner,admin" --allow-insecure-unlock --miner.threads=1
+```
+
+## 4.2 - `Bootnode`
+
+- Generating `bootnode` key
+```cmd
+bootnode -genkey bootnode.key
+bootnode -genkey bootnode02.key
+```
+
+- Starting `bootnode` nodes (Remember to save `enode` string for later)
+```cmd
+bootnode -nodekey bootnode.key
+bootnode -nodekey bootnode02.key -addr :30302
+```
+- Starting peer nodes
+```cmd
+geth --identity "node01" --datadir node01 --http --http.api "eth,net,web3,personal,miner,admin" --bootnodes enode://<enode-bootnode-01>,enode://<enode-bootnode-02>
+geth --identity "node02" --datadir node02 --port "30304" --ipcdisable --miner.threads=1 --bootnodes enode://<enode-bootnode-01>,enode://<enode-bootnode-02>
 ```
 
 # 5. Interaction with network
