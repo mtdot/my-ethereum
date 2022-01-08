@@ -56,7 +56,7 @@ geth --datadir .\node01\ account new          # creating account, remember to ba
 
 - Starting Nodes (Remember to collect peer string for adding peer node later - Section 5)
 ```cmd
-geth --identity "node01" --datadir node01 --port "30303" --ipcdisable --http --http.port 8545 --http.api "eth,net,web3,personal,miner,admin" --allow-insecure-unlock --miner.threads=1
+geth --identity "node01" --datadir node01 --port "30303" --ipcdisable --http --http.port 8545 --http.api "eth,net,web3,personal,miner,admin" --allow-insecure-unlock --mine --miner.threads=1
 geth --identity "node02" --datadir node02 --port "30304" --ipcdisable --http --http.port 8546 --http.api "eth,net,web3,personal,miner,admin" --allow-insecure-unlock --miner.threads=1
 ```
 
@@ -75,7 +75,7 @@ bootnode -nodekey bootnode02.key -addr :30302
 ```
 - Starting peer nodes
 ```cmd
-geth --identity "node01" --datadir node01 --http --http.api "eth,net,web3,personal,miner,admin" --bootnodes enode://<enode-bootnode-01>,enode://<enode-bootnode-02>
+geth --identity "node01" --datadir node01 --http --http.api "eth,net,web3,personal,miner,admin" --mine --miner.threads=1 --bootnodes enode://<enode-bootnode-01>,enode://<enode-bootnode-02>
 geth --identity "node02" --datadir node02 --port "30304" --ipcdisable --miner.threads=1 --bootnodes enode://<enode-bootnode-01>,enode://<enode-bootnode-02>
 ```
 
@@ -130,4 +130,24 @@ eth.sendTransaction({from:eth.accounts[0], to:eth.accounts[1], value:1000000})
 </p>
 </details>
 
-# 6. Deploy smart contract to private network (TBA)
+# 6. Deploy smart contract to private network
+
+## 6.1 - Generating `hardhat` sample project
+
+- Run initialize command
+```cmd
+npx hardhat init
+```
+
+- Select options for creating hardhat sample project.
+
+## 6.2 - Deploying
+
+- Run deploy script.
+```cmd
+npx hardhat run .\scripts\sample-script.js
+```
+
+- Output should look like this. Congratulation!
+> Deploying a Greeter with greeting: Hello, Hardhat!  
+Greeter deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3
